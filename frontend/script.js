@@ -8,7 +8,7 @@ const clips = [
 ];
 
 let current = 0;
-video.src = "../Silhouettes/silhouettes/" + clips[current].file;
+video.src = "silhouettes/" + clips[current].file;
 
 function submitGuess() {
   const guess = document.getElementById("guess").value.trim().toLowerCase();
@@ -22,7 +22,7 @@ function submitGuess() {
 
   current = (current + 1) % clips.length;
   setTimeout(() => {
-    video.src = "../Silhouettes/silhouettes/" + clips[current].file;
+    video.src = "silhouettes/" + clips[current].file;
     feedback.textContent = "";
     document.getElementById("guess").value = "";
   }, 3000);
