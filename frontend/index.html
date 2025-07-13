@@ -9,10 +9,15 @@
   <h1>🏌️‍♂️ Guess That Golfer!</h1>
   <video id="swing" width="640" height="360" controls autoplay muted></video>
 
+  <div class="mode-toggle">
+    <button onclick="setMode('daily')">Daily Mode</button>
+    <button onclick="setMode('practice')">Practice Mode</button>
+  </div>
+
   <div class="guess-box">
     <input list="golfers" id="guess" placeholder="Who’s the golfer?">
 
-    <datalist id="golfers">
+    <datalist id="golfers">  
     </datalist>
 
     <button onclick="submitGuess()">Submit</button>

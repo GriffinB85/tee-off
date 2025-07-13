@@ -72,6 +72,7 @@ golferNames.forEach(name => {
   datalist.appendChild(option);
 });
 
+let mode = "daily"; // or "practice"
 
 let current = 0;
 video.src = "silhouettes/" + clips[current].file;
@@ -86,10 +87,46 @@ function submitGuess() {
     feedback.textContent = "❌ Nope! It's " + clips[current].answer;
   }
 
-  current = (current + 1) % clips.length;
-  setTimeout(() => {
-    video.src = "silhouettes/" + clips[current].file;
-    feedback.textContent = "";
-    document.getElementById("guess").value = "";
-  }, 3000);
+  if (mode === "daily") {
+    // ✅ Wait for feedback, then offer switch prompt
+    setTimeout(() => {
+      const switchPrompt = confirm("Would you like to enter Practice Mode?");
+      if (switchPrompt) {
+        setMode("practice");
+      }
+    }, 2000);
+  } else {
+    // 🔄 Practice Mode — loop to next clip
+    setTimeout(() => {
+      loadClip();
+      feedback.textContent = "";
+      document.getElementById("guess").value = "";
+    }, 3000);
+  }
+
+}
+
+function getDailyIndex() {
+  const today = new Date().toISOString().slice(0, 10); // e.g., "2025-07-13"
+  let hash = 0;
+  for (let i = 0; i < today.length; i++) {
+    hash += today.charCodeAt(i);
+  }
+  return hash % clips.length;
+}
+
+function loadClip() {
+  if (mode === "daily") {
+    current = getDailyIndex();
+  } else {
+    current = Math.floor(Math.random() * clips.length);
+  }
+  video.src = "silhouettes/" + clips[current].file;
+}
+
+function setMode(selected) {
+  mode = selected;
+  loadClip();
+  feedback.textContent = "";
+  document.getElementById("guess").value = "";
 }
