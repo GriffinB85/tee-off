@@ -20,3 +20,12 @@ button {
 .guess-box {
   margin-top: 20px;
 }
+#corner-icon {
+  position: fixed;
+  bottom: 15px;      /* or use top: 15px for upper corner */
+  right: 15px;       /* or left: 15px for bottom-left */
+  width: 256px;       /* or scale to taste */
+  height: 256px;
+  opacity: 1;     /* slightly transparent */
+  z-index: 999;
+}
