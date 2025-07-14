@@ -4,9 +4,14 @@ const datalist = document.getElementById("golfers");
 
 const clips = [
   { file: "Poston_swing_web_ready.mp4", answer: "J.T. Poston" },
-  { file: "Bryson_swing_web_ready.mp4", answer: "Bryson DeChambeau" },
+  { file: "DeChambeau_swing_web_ready.mp4", answer: "Bryson DeChambeau" },
+  { file: "Scheffler_swing_web_ready.mp4", answer: "Scottie Scheffler" },
+  { file: "Morikawa_swing_web_ready.mp4", answer: "Collin Morikawa" },
+  { file: "McIlroy_swing_web_ready.mp4", answer: "Rory McIlroy" },
+	{ file: "Thomas_swing_web_ready.mp4", answer: "Justin Thomas" },
+	{ file: "Schauffele_swing_web_ready.mp4", answer: "Xander Schauffele" }
   // Add more here
-];
+];			
 
 const golferNames = [
   "Scottie Scheffler",
