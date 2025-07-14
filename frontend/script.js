@@ -2,6 +2,10 @@ const video = document.getElementById("swing");
 const feedback = document.getElementById("feedback");
 const datalist = document.getElementById("golfers");
 
+const resultBox = document.getElementById("result-box");
+const resultMessage = document.getElementById("result-message");
+const resultActions = document.getElementById("result-actions");
+
 const clips = [
   { file: "Poston_swing_web_ready.mp4", answer: "J.T. Poston" },
   { file: "DeChambeau_swing_web_ready.mp4", answer: "Bryson DeChambeau" },
@@ -86,28 +90,35 @@ function submitGuess() {
   const guess = document.getElementById("guess").value.trim().toLowerCase();
   const actual = clips[current].answer.toLowerCase();
 
-  if (guess === actual) {
-    feedback.textContent = "✅ Correct!";
+	document.getElementById("guess").value = "";
+
+	if (guess === actual) {
+    resultMessage.textContent = "✅ Correct!";
   } else {
-    feedback.textContent = "❌ Nope! It's " + clips[current].answer;
-  }
+    resultMessage.textContent = `❌ Nope! It was ${clips[current].answer}`;
+  }	
+
+	resultActions.innerHTML = "";
 
   if (mode === "daily") {
-    // ✅ Wait for feedback, then offer switch prompt
-    setTimeout(() => {
-      const switchPrompt = confirm("Would you like to enter Practice Mode?");
-      if (switchPrompt) {
-        setMode("practice");
-      }
-    }, 2000);
+    const switchBtn = document.createElement("button");
+    switchBtn.textContent = "Go to Practice Mode";
+    switchBtn.onclick = () => {
+      setMode("practice");
+      resultBox.classList.add("hidden");
+    };
+    resultActions.appendChild(switchBtn);
   } else {
-    // 🔄 Practice Mode — loop to next clip
-    setTimeout(() => {
+    const replayBtn = document.createElement("button");
+    replayBtn.textContent = "Play Again";
+    replayBtn.onclick = () => {
+      resultBox.classList.add("hidden");
       loadClip();
-      feedback.textContent = "";
-      document.getElementById("guess").value = "";
-    }, 3000);
+    };
+    resultActions.appendChild(replayBtn);
   }
+
+  resultBox.classList.remove("hidden");
 
 }
 
@@ -135,3 +146,9 @@ function setMode(selected) {
   feedback.textContent = "";
   document.getElementById("guess").value = "";
 }
+
+function playAgain() {
+  resultBox.classList.add("hidden");
+  loadClip();
+}
+
