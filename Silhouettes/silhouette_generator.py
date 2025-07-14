@@ -4,7 +4,7 @@ import shutil
 import subprocess
 
 input_folder = 'original_clips'
-output_folder = 'silhouettes'
+output_folder = os.path.join('frontend', 'silhouettes')
 
 # Make sure output folder exists
 os.makedirs(output_folder, exist_ok=True)
