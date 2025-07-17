@@ -6,6 +6,24 @@ const resultBox = document.getElementById("result-box");
 const resultMessage = document.getElementById("result-message");
 const resultActions = document.getElementById("result-actions");
 
+let bios = [];
+
+fetch("data/player_bios.json")
+  .then((res) => res.json())
+  .then((data) => {
+    bios = data;
+  });
+
+const BIO_FIELDS = [
+  "displayName",
+  "countryCode",
+  "age",
+  "turnedPro",
+  "education",
+  "careerWins",
+  "partners"
+];
+
 const clips = [
   { file: "Poston_swing_web_ready.mp4", answer: "J.T. Poston" },
   { file: "DeChambeau_swing_web_ready.mp4", answer: "Bryson DeChambeau" },
@@ -74,8 +92,38 @@ const golferNames = [
   "Matt Fitzpatrick"
 ];
 
+console.log("Script.js is running");
+
 let guessCount = 0;
 const maxGuesses = 5;
+showBioGrid();
+
+function showBioGrid() {
+  const grid = document.getElementById("bio-grid");
+  grid.innerHTML = "";
+
+  for (let i = 0; i < 35; i++) {
+    const tile = document.createElement("div");
+    tile.className = "tile grid-tile";
+    tile.textContent = "";
+    grid.appendChild(tile);
+  }
+}
+
+function populateGridRow(bio) {
+  const grid = document.getElementById("bio-grid");
+  const rowIndex = guessCount - 1; // zero-based row index
+
+  if (rowIndex >= 5) return; // safeguard: max 5 rows
+
+  for (let i = 0; i < 7; i++) {
+    const field = BIO_FIELDS[i];
+    const value = bio?.[field] || "";
+    const tileIndex = rowIndex * 7 + i;
+
+    grid.children[tileIndex].textContent = value;
+  }
+}
 
 // 🧠 Populate datalist options
 golferNames.forEach(name => {
@@ -99,15 +147,23 @@ function submitGuess() {
 
 	if (guess === actual) {
     resultMessage.textContent = "✅ Correct!";
+    resultBox.classList.remove("hidden");
     endRound(); // ends the round early
   } else if (guessCount >= maxGuesses) {
     resultMessage.textContent = `❌ Out of guesses! It was ${clips[current].answer}`;
+    resultBox.classList.remove("hidden");
     endRound(); // max guesses reached
   } else {
-    resultMessage.textContent = `❌ Nope! Try again (${guessCount}/${maxGuesses})`;
-    resultBox.classList.remove("hidden");
-    return; // don’t show replay/switch options until end
+    //resultMessage.textContent = `❌ Nope! Try again (${guessCount}/${maxGuesses})`;
+    //resultBox.classList.remove("hidden");
   }
+  //console.log("Bio count:", bios.length);
+
+  const bio = bios.find(p => p.displayName.toLowerCase() === guess);
+  //console.log("Looking for bio of:", guess_name);
+  //console.log("Matched bio:", bio);
+
+  if (bio) populateGridRow(bio);
 
 	resultActions.innerHTML = "";
 
@@ -128,8 +184,6 @@ function submitGuess() {
     };
     resultActions.appendChild(replayBtn);
   }
-
-  resultBox.classList.remove("hidden");
 
   const tileContainer = document.getElementById("bio-tiles");
   tileContainer.innerHTML = ""; // reset on each guess
@@ -190,7 +244,7 @@ function loadClip() {
 
 function setMode(selected) {
   guessCount = 0; // reset guess count
-  
+
   mode = selected;
   loadClip();
   feedback.textContent = "";
