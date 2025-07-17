@@ -1,0 +1,18 @@
+__pycache__/
+*.pyc
+
+# Driver binaries and artifacts
+utilities/driver/
+*.zip
+
+# Optional: scraped data (if you want to exclude cached bios etc.)
+player-data/cache/
+*.log
+
+# Editor/workspace settings
+.vscode/
+*.swp
+
+# OS trash files
+.DS_Store
+Thumbs.db

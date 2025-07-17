@@ -8,6 +8,9 @@
 <body>
   <h1>🏌️‍♂️ Guess That Golfer!</h1>
   <video id="swing" width="640" height="360" controls autoplay muted></video>
+  
+  <h6>*This video is provided by youtube.com/@PGATOUR and has no affiliation with or connection to Tee Off.</h6>
+  <h6>Tee Off - A Griffin Buschjost Project</h6>
 
   <div class="mode-toggle">
     <button onclick="setMode('daily')">Daily Mode</button>
@@ -29,11 +32,23 @@
   	</div>
 	</div>
 
+  <div id="tile-headers" class="tile-row">
+    <div class="tile header">Name</div>
+    <div class="tile header">Country</div>
+    <div class="tile header">Age</div>
+    <div class="tile header">Turned Pro</div>
+    <div class="tile header">College</div>
+    <div class="tile header">Career Wins</div>
+    <div class="tile header">Partners</div>
+  </div>
+
+
+ <div id="bio-tiles" class="tile-row hidden"></div>
+
 
   <img src="Favicon.png" id="corner-icon">
 
-	<h5>*This video is provided by youtube.com/@PGATOUR and has no affiliation with or connection to Tee Off.</h5>
-  <h3>Tee Off - A Griffin Buschjost Project</h3>
+	
 
   <p id="feedback"></p>
 

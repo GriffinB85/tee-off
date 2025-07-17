@@ -58,7 +58,34 @@ button {
   background-color: #1a54cc;
 }
 
+.hidden {
+  display: none;
+}
 
+.tile-row {
+  display: flex;
+  gap: 8px;
+  margin-top: 16px;
+  justify-content: center;
+}
+.tile {
+  width: 100px;
+  height: 60px;
+  background-color: #e2e2e2;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 14px;
+}
+.tile.header {
+  background-color: #333;
+  color: white;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
 .hidden {
   display: none;
 }

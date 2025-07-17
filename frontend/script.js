@@ -74,6 +74,9 @@ const golferNames = [
   "Matt Fitzpatrick"
 ];
 
+let guessCount = 0;
+const maxGuesses = 5;
+
 // 🧠 Populate datalist options
 golferNames.forEach(name => {
   const option = document.createElement("option");
@@ -87,6 +90,8 @@ let current = 0;
 video.src = "silhouettes/" + clips[current].file;
 
 function submitGuess() {
+  guessCount++;
+
   const guess = document.getElementById("guess").value.trim().toLowerCase();
   const actual = clips[current].answer.toLowerCase();
 
@@ -94,9 +99,15 @@ function submitGuess() {
 
 	if (guess === actual) {
     resultMessage.textContent = "✅ Correct!";
+    endRound(); // ends the round early
+  } else if (guessCount >= maxGuesses) {
+    resultMessage.textContent = `❌ Out of guesses! It was ${clips[current].answer}`;
+    endRound(); // max guesses reached
   } else {
-    resultMessage.textContent = `❌ Nope! It was ${clips[current].answer}`;
-  }	
+    resultMessage.textContent = `❌ Nope! Try again (${guessCount}/${maxGuesses})`;
+    resultBox.classList.remove("hidden");
+    return; // don’t show replay/switch options until end
+  }
 
 	resultActions.innerHTML = "";
 
@@ -120,6 +131,41 @@ function submitGuess() {
 
   resultBox.classList.remove("hidden");
 
+  const tileContainer = document.getElementById("bio-tiles");
+  tileContainer.innerHTML = ""; // reset on each guess
+
+  for (let i = 0; i < 6; i++) {
+    const tile = document.createElement("div");
+    tile.className = "tile";
+    tile.textContent = ""; // will fill later with bio info
+    tileContainer.appendChild(tile);
+  }
+
+  tileContainer.classList.remove("hidden");
+  
+}
+
+function endRound() {
+  resultActions.innerHTML = "";
+  if (mode === "daily") {
+    const switchBtn = document.createElement("button");
+    switchBtn.textContent = "Go to Practice Mode";
+    switchBtn.onclick = () => {
+      setMode("practice");
+      resultBox.classList.add("hidden");
+    };
+    resultActions.appendChild(switchBtn);
+  } else {
+    const replayBtn = document.createElement("button");
+    replayBtn.textContent = "Play Again";
+    replayBtn.onclick = () => {
+      resultBox.classList.add("hidden");
+      loadClip();
+    };
+    resultActions.appendChild(replayBtn);
+  }
+
+  resultBox.classList.remove("hidden");
 }
 
 function getDailyIndex() {
@@ -132,6 +178,8 @@ function getDailyIndex() {
 }
 
 function loadClip() {
+  guessCount = 0; // reset guess count
+
   if (mode === "daily") {
     current = getDailyIndex();
   } else {
@@ -141,6 +189,8 @@ function loadClip() {
 }
 
 function setMode(selected) {
+  guessCount = 0; // reset guess count
+  
   mode = selected;
   loadClip();
   feedback.textContent = "";
