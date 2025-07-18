@@ -6,16 +6,17 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header id="top-banner" class="banner">
-    <div class="banner-mode">
-      <label for="mode-select">Mode:</label>
+  <div id="top-banner">
+    <img src="Favicon.png" alt="Logo" id="banner-logo">
+    <div id="banner-controls">
       <select id="mode-select">
-        <option value="daily">Daily</option>
-        <option value="practice">Practice</option>
+        <option value="daily">Daily Mode</option>
+        <option value="practice">Practice Mode</option>
       </select>
-    </div>  
 
-  </header>
+      <button id="help-button">❓ Help</button>
+    </div>
+  </div>
 
   <h1>🏌️‍♂️ Guess That Golfer!</h1>
   <video id="swing" width="640" height="360" controls autoplay muted></video>
@@ -49,9 +50,21 @@
 
   <div id="bio-grid" class="grid"></div>
 
-  <img src="Favicon.png" id="corner-icon">
-
   <p id="feedback"></p>
+
+  <div id="help-modal" class="modal hidden">
+    <div class="modal-content">
+      <h2>How to Play</h2>
+      <ul>
+        <li>Watch the swing video and guess the golfer.</li>
+        <li>You get 5 guesses per round.</li>
+        <li>Each guess reveals bio info to help you narrow it down.</li>
+        <li>Use the dropdown to switch between Daily and Practice modes.</li>
+      </ul>
+      <button id="close-help">Close</button>
+    </div>
+  </div>
+
 
 	<script async src="https://www.googletagmanager.com/gtag/js?id=G-MG24NM6Z45"></script>
 	<script>

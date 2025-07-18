@@ -20,14 +20,7 @@ button {
 .guess-box {
   margin-top: 20px;
 }
-#corner-icon {
-  position: absolute;
-  top: 15px;      /* or use top: 15px for upper corner */
-  left: 60px;       /* or left: 15px for bottom-left */
-  width: 128px;       /* or scale to taste */
-  height: 128px;
-  z-index: 1;
-}
+
 
 #result-box {
   display: none; /* hidden by default */
@@ -117,32 +110,72 @@ result-actions button:hover {
   font-weight: bold;
 }
 
-.banner {
-  width: 100%;
-  background-color: #46ab4b; /* a rich green tone */
-  padding: 32px 40px;
+#top-banner {
   display: flex;
+  justify-content: center;       /* center everything horizontally */
   align-items: center;
-  justify-content: space-between;
+  background-color: #2e7d32;
+  padding: 12px 24px;
   color: white;
-  font-family: sans-serif;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-}
-.banner-mode {
-  margin-left: 32px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 16px;
-  color: white;
+  gap: 24px;                     /* spacing between logo and controls */
 }
 
-#mode-select {
-  background-color: white;
-  color: #2e7d32;
-  border: none;
-  padding: 6px 12px;
-  border-radius: 4px;
-  font-weight: bold;
-  cursor: pointer;
+#banner-controls {
+  display: flex;
+  gap: 16px;
+  align-items: center;
 }
+
+#banner-logo {
+  width: 100px;
+  height: 100px;
+  margin-right: 16px;
+}
+
+
+#mode-select {
+  padding: 6px 12px;
+  font-size: 16px;
+  border-radius: 6px;
+  border: none;
+}
+
+
+/* ─── Help Modal ─────────────────────────────────────────────────────────── */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9998;
+}
+
+.modal.hidden {
+  display: none;
+}
+
+.modal-content {
+  background: white;
+  padding: 24px 32px;
+  border-radius: 12px;
+  max-width: 500px;
+  text-align: left;
+  color: #333;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+}
+
+#help-button {
+  background-color: #ffffff;
+  color: #2e7d32;
+  border: 2px solid #ffffff;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+

@@ -6,12 +6,26 @@ const resultBox = document.getElementById("result-box");
 const resultMessage = document.getElementById("result-message");
 const resultActions = document.getElementById("result-actions");
 
+const helpButton = document.getElementById("help-button");
+const helpModal = document.getElementById("help-modal");
+const closeHelp = document.getElementById("close-help");
+
+
 // ─── Data & Constants ────────────────────────────────────────────────────────
 let bios = [];
 fetch("data/player_bios.json")
-  .then((res) => res.json())
-  .then((data) => {
+  .then(res => res.json())
+  .then(data => {
     bios = data;
+
+    datalist.innerHTML = "";
+    bios.forEach(player => {
+      if (player.displayName) {
+        const opt = document.createElement("option");
+        opt.value = player.displayName;
+        datalist.appendChild(opt);
+      }
+    });
   });
 
 const BIO_FIELDS = [
@@ -35,69 +49,11 @@ const clips = [
   // Add more here
 ];			
 
-const golferNames = [
-  "Scottie Scheffler",
-  "Rory McIlroy",
-  "Xander Schauffele",
-  "Justin Thomas",
-  "Collin Morikawa",
-  "Russell Henley",
-  "Keegan Bradley",
-  "J.J. Spaun",
-  "Ludvig Åberg",
-  "Sepp Straka",
-  "Hideki Matsuyama",
-  "Viktor Hovland",
-  "Tommy Fleetwood",
-  "Robert MacIntyre",
-  "Bryson DeChambeau",
-  "Maverick McNealy",
-  "Ben Griffin",
-  "Shane Lowry",
-  "Harris English",
-  "Patrick Cantlay",
-  "Sam Burns",
-  "Tyrrell Hatton",
-  "Justin Rose",
-  "Corey Conners",
-  "Sungjae Im",
-  "Brian Harman",
-  "Billy Horschel",
-  "Jason Day",
-  "Ryan Fox",
-  "Nick Taylor",
-  "Daniel Berger",
-  "Wyndham Clark",
-  "Aaron Rai",
-  "Akshay Bhatia",
-  "Min Woo Lee",
-  "Thomas Detry",
-  "Taylor Pendrith",
-  "Cameron Young",
-  "Denny McCarthy",
-  "Adam Scott",
-  "Lucas Glover",
-  "J.T. Poston",
-  "Tony Finau",
-  "Sahith Theegala",
-  "Byeong Hun An",
-  "Jordan Spieth",
-  "Tom Hoge",
-  "Will Zalatoris",
-  "Gary Woodland",
-  "Max Homa",
-  "Davis Riley",
-  "Mito Pereira",
-  "Chris Kirk",
-  "Matt Fitzpatrick"
-];
-
 let guessCount = 0;
 const maxGuesses = 5;
 let mode = "daily"; // or "practice"
 let current = 0;
 
-populateDatalist();
 showBioGrid();
 setMode(mode); // Initialize with default mode
 
@@ -106,6 +62,14 @@ document.getElementById("mode-select")
   .addEventListener("change", e => {
     setMode(e.target.value);
   });
+
+helpButton.onclick = () => {
+  helpModal.classList.remove("hidden");
+};
+
+closeHelp.onclick = () => {
+  helpModal.classList.add("hidden");
+};
 
 
 function submitGuess() {
@@ -166,15 +130,6 @@ function endRound() {
 }
 
 // ─── Helper Functions ────────────────────────────────────────────────────────
-
-function populateDatalist() {
-  golferNames.forEach(name => {
-    const opt = document.createElement("option");
-    opt.value = name;
-    datalist.appendChild(opt);
-  });
-}
-
 function showBioGrid() {
   const grid = document.getElementById("bio-grid");
   grid.innerHTML = "";
@@ -206,7 +161,7 @@ function loadClip() {
   guessCount = 0;
   hideResultBox();
   showBioGrid();
-  
+
   if (mode === "daily") {
     current = getDailyIndex();
   } else {
