@@ -21,46 +21,56 @@ button {
   margin-top: 20px;
 }
 #corner-icon {
-  position: fixed;
-  bottom: 15px;      /* or use top: 15px for upper corner */
-  right: 15px;       /* or left: 15px for bottom-left */
-  width: 256px;       /* or scale to taste */
-  height: 256px;
-  opacity: 1;     /* slightly transparent */
-  z-index: 999;
+  position: absolute;
+  top: 15px;      /* or use top: 15px for upper corner */
+  left: 60px;       /* or left: 15px for bottom-left */
+  width: 128px;       /* or scale to taste */
+  height: 128px;
+  z-index: 1;
 }
 
 #result-box {
+  display: none; /* hidden by default */
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: white;
-  border: 2px solid #333;
-  padding: 20px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.2);
-  z-index: 1000;
+  background-color: #ffffff;
+  border: 2px solid #2e7d32;
+  color: #2e7d32;
+  padding: 24px 32px;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+  z-index: 9999;
   text-align: center;
-  width: 300px;
-  max-width: 90%;
+  min-width: 300px;
 }
-#result-actions button {
-  margin: 10px 5px;
-  padding: 8px 12px;
-  border: none;
-  background-color: #2f75ff;
-  color: white;
-  border-radius: 5px;
-  cursor: pointer;
+#result-box.visible {
+  display: block;       /* shown when we add .visible */
 }
 
-#result-actions button:hover {
+
+#result-actions {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 16px;
+}
+#result-actions button {
+  background-color: #ffffff !important;
+  color: #2e7d32 !important;
+  border: 2px solid #2e7d32;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 6px;
+}
+result-actions button:hover {
   background-color: #1a54cc;
 }
 
-.hidden {
-  display: none;
-}
 
 .tile-row {
   display: flex;
@@ -86,9 +96,8 @@ button {
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
-.hidden {
-  display: none;
-}
+
+
 
 .grid {
   display: grid;
@@ -106,4 +115,34 @@ button {
   justify-content: center;
   font-size: 13px;
   font-weight: bold;
+}
+
+.banner {
+  width: 100%;
+  background-color: #46ab4b; /* a rich green tone */
+  padding: 32px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: white;
+  font-family: sans-serif;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+.banner-mode {
+  margin-left: 32px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+  color: white;
+}
+
+#mode-select {
+  background-color: white;
+  color: #2e7d32;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
 }

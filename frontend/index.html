@@ -6,16 +6,22 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <header id="top-banner" class="banner">
+    <div class="banner-mode">
+      <label for="mode-select">Mode:</label>
+      <select id="mode-select">
+        <option value="daily">Daily</option>
+        <option value="practice">Practice</option>
+      </select>
+    </div>  
+
+  </header>
+
   <h1>🏌️‍♂️ Guess That Golfer!</h1>
   <video id="swing" width="640" height="360" controls autoplay muted></video>
   
   <h6>*This video is provided by youtube.com/@PGATOUR and has no affiliation with or connection to Tee Off.</h6>
   <h6>Tee Off - A Griffin Buschjost Project</h6>
-
-  <div class="mode-toggle">
-    <button onclick="setMode('daily')">Daily Mode</button>
-    <button onclick="setMode('practice')">Practice Mode</button>
-  </div>
 
   <div class="guess-box">
     <input list="golfers" id="guess" placeholder="Who’s the golfer?">
@@ -28,8 +34,7 @@
 
   <div id="result-box" class="hidden">
   	<p id="result-message"></p>
-  	<div id="result-actions">
-  	</div>
+  	<div id="result-actions"></div>
 	</div>
 
   <div id="tile-headers" class="tile-row">
