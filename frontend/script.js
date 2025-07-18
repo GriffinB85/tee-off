@@ -45,7 +45,10 @@ const clips = [
   { file: "Morikawa_swing_web_ready.mp4", answer: "Collin Morikawa" },
   { file: "McIlroy_swing_web_ready.mp4", answer: "Rory McIlroy" },
 	{ file: "Thomas_swing_web_ready.mp4", answer: "Justin Thomas" },
-	{ file: "Schauffele_swing_web_ready.mp4", answer: "Xander Schauffele" }
+	{ file: "Schauffele_swing_web_ready.mp4", answer: "Xander Schauffele" },
+  { file: "Aberg_swing_web_ready.mp4", answer: "Ludvig \u00c5berg" },
+  { file: "Baddeley_swing_web_ready.mp4", answer: "Aaron Badderley" },
+  { file: "Berger_swing_web_ready.mp4", answer: "Daniel Berger" }
   // Add more here
 ];			
 
